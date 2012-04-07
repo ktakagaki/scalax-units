@@ -28,6 +28,7 @@ object Units {
   }
   
   case class Quantity[M <: MInt, KG <: MInt, S <: MInt, A <: MInt, K <: MInt, Mol <: MInt, CD <: MInt, T: Numeric](value: T) {
+    import Quantity._
     
     private val num = numeric[T]
   
@@ -47,7 +48,26 @@ object Units {
     def -(m: This) = Quantity[M, KG, S, A, K, Mol, CD, T](num.minus(value, m.value))
     def *[M2 <: MInt, KG2 <: MInt, S2 <: MInt, A2 <: MInt, K2 <: MInt, Mol2 <: MInt, CD2 <: MInt](m: Quantity[M2, KG2, S2, A2, K2, Mol2, CD2, T]) = Quantity[M + M2, KG + KG2, S + S2, A + A2, K + K2, Mol + Mol2, CD + CD2, T](num.times(value, m.value))
     def /[M2 <: MInt, KG2 <: MInt, S2 <: MInt, A2 <: MInt, K2 <: MInt, Mol2 <: MInt, CD2 <: MInt](m: Quantity[M2, KG2, S2, A2, K2, Mol2, CD2, T]) = Quantity[M - M2, KG - KG2, S - S2, A - A2, K - K2, Mol - Mol2, CD - CD2, T](num.div(value, m.value))
+  
+    def niceString(implicit u: ToString[M, KG, S, A, K, Mol, CD]) = value + u.toString
   }
+  
+  object Quantity {
+    class ToString[M <: MInt, KG <: MInt, S <: MInt, A <: MInt, K <: MInt, Mol <: MInt, CD <: MInt](override val toString: String)
+    implicit val length =            new ToString[_1, _0, _0, _0, _0, _0, _0](" m")
+    implicit val mass =              new ToString[_0, _1, _0, _0, _0, _0, _0](" kg")
+    implicit val time =              new ToString[_0, _0, _1, _0, _0, _0, _0](" s")
+    implicit val currency =          new ToString[_0, _0, _0, _1, _0, _0, _0](" a")
+    implicit val temperature =       new ToString[_0, _0, _0, _0, _1, _0, _0](" k")
+    implicit val mol =               new ToString[_0, _0, _0, _0, _0, _1, _0](" mol")
+    implicit val luminousIntensity = new ToString[_0, _0, _0, _0, _0, _1, _0](" cd")
+    
+    implicit val area =              new ToString[_2, _0, _0, _0, _0, _0, _0](" m^2")
+    implicit val volume =            new ToString[_3, _0, _0, _0, _0, _0, _0](" m^3")
+    implicit val speed =             new ToString[_1, _0, _1#Neg, _0, _0, _0, _0](" m/s")
+    implicit val acceleration =      new ToString[_1, _0, _2#Neg, _0, _0, _0, _0](" m/s^2")
+  }
+  
 
   implicit def measure[T: Numeric](v: T): Quantity[_0, _0, _0, _0, _0, _0, _0, T] = Quantity[_0, _0, _0, _0, _0, _0, _0, T](v)
 

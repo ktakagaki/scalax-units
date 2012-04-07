@@ -1,7 +1,15 @@
-package scalax.units.example
+package scalax.example
 
-import scalax.units.Units._
-import scalax.units.Integers._
+import scalax.units.Units.Acceleration
+import scalax.units.Units.Area
+import scalax.units.Units.Length
+import scalax.units.Units.Mass
+import scalax.units.Units.Temperature
+import scalax.units.Units.Time
+import scalax.units.Units.Speed
+import scalax.units.Units.Volume
+import scalax.units.Units.measure
+import scalax.units.Units.numericToQuantity
 
   /*
    *  - unit names as implicit methods
@@ -9,10 +17,10 @@ import scalax.units.Integers._
    *  - no weak conformance between numbers, e. g. Time[Int] will always stay an Int
    *  - many parens necessary
    *  - "number * Quantity" doesn't work, only "Quantity * number"
-   *  - no unit information in toString, e. g. no "Quantity(5m)", just "Quantity(5)"  
+   *  - no unit information in toString, use niceString (and provide an implicit in scope, if necessary)  
    */
 
-object UnitExample2 extends App {
+object UnitExample extends App {
   val mass: Mass[Double] = 4.0 kg
   val longMass: Mass[Long] = (4.0 kg) asLong
   val length: Length[Int] = (5 m) * 3
@@ -28,16 +36,15 @@ object UnitExample2 extends App {
   val accel: Acceleration[Double] = (10.0 m) / ((2.0 s) * (1.0 s))
   val accelNum: Double = accel toDouble
   
-  println(mass)
-  println(length)
-  println(temperature)
-  println(time)
-  println(time2)
-  println(time3)
-  println(speed)
-  println(area)
-  println(volume)
-  println(smallVolume)
-  println(accel)
-  println(accelNum)
+  println(mass.niceString)
+  println(length.niceString)
+  println(temperature.niceString)
+  println(time.niceString)
+  println(time2.niceString)
+  println(time3.niceString)
+  println(speed.niceString)
+  println(area.niceString)
+  println(volume.niceString)
+  println(smallVolume.niceString)
+  println(accel.niceString)
 }

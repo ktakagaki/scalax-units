@@ -2,7 +2,7 @@ package scalax.units
 
 object Booleans {
   import Utils._
-  
+
   sealed trait Bool {
     type And[B <: Bool] <: Bool
     type Or[B <: Bool] <: Bool
