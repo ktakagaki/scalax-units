@@ -27,11 +27,9 @@ object Units {
     type CD = _CD
   }
   
-  case class Quantity[M <: MInt, KG <: MInt, S <: MInt, A <: MInt, K <: MInt, Mol <: MInt, CD <: MInt, T: Numeric](value: T) {
+  case class Quantity[M <: MInt, KG <: MInt, S <: MInt, A <: MInt, K <: MInt, Mol <: MInt, CD <: MInt, T](value: T)(implicit num: Numeric[T]) {
     import Quantity._
-    
-    private val num = numeric[T]
-  
+      
     def asInt = Quantity[M, KG, S, A, K, Mol, CD, Int](num.toType[Int](value))
     def asLong = Quantity[M, KG, S, A, K, Mol, CD, Long](num.toType[Long](value))
     def asFloat = Quantity[M, KG, S, A, K, Mol, CD, Float](numeric[T].toType[Float](value))

@@ -1,15 +1,6 @@
 package scalax.example
 
-import scalax.units.Units.Acceleration
-import scalax.units.Units.Area
-import scalax.units.Units.Length
-import scalax.units.Units.Mass
-import scalax.units.Units.Temperature
-import scalax.units.Units.Time
-import scalax.units.Units.Speed
-import scalax.units.Units.Volume
-import scalax.units.Units.measure
-import scalax.units.Units.numericToQuantity
+import scalax.units.Units._
 
   /*
    *  - unit names as implicit methods
