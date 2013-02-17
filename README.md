@@ -2,7 +2,7 @@
 
 Units of Measurements for Scala
 based on Jesper Nordenberg's [metascala](http://www.assembla.com/spaces/metascala/wiki)
-and Erik Osheim's [Numeric work](https://github.com/azavea/numeric) 
+and Erik Osheim's excellent [Spire](https://github.com/non/spire) library.
 
 Example code:
 

@@ -1,9 +1,7 @@
 name := "scalax-units"
 
-version := "0.8"
+version := "0.9"
 
-scalaVersion := "2.9.2" //"2.10.0-SNAPSHOT"
+scalaVersion := "2.10.0"
 
-//scalacOptions ++= Seq("-Yno-self-type-checks")
-
-resolvers += "sonatype snapshots" at "https://oss.sonatype.org/content/repositories/snapshots/"
+libraryDependencies += "org.spire-math" %% "spire" % "0.3.0"

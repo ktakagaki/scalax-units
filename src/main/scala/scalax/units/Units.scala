@@ -1,8 +1,8 @@
 package scalax.units
 
 object Units {
-  import scalax.math.Numeric
-  import scalax.math.Numeric._
+  import spire.math.Numeric
+  import spire.math.Numeric._
   import Integers._
   import Addables._
   import Subtractables._
@@ -32,8 +32,8 @@ object Units {
       
     def asInt = Quantity[M, KG, S, A, K, Mol, CD, Int](num.toType[Int](value))
     def asLong = Quantity[M, KG, S, A, K, Mol, CD, Long](num.toType[Long](value))
-    def asFloat = Quantity[M, KG, S, A, K, Mol, CD, Float](numeric[T].toType[Float](value))
-    def asDouble = Quantity[M, KG, S, A, K, Mol, CD, Double](numeric[T].toType[Double](value))
+    def asFloat = Quantity[M, KG, S, A, K, Mol, CD, Float](num.toType[Float](value))
+    def asDouble = Quantity[M, KG, S, A, K, Mol, CD, Double](num.toType[Double](value))
     
     def toInt: Int = (num.toType[Int](value))
     def toLong: Long = (num.toType[Long](value))
@@ -69,34 +69,32 @@ object Units {
 
   implicit def measure[T: Numeric](v: T): Quantity[_0, _0, _0, _0, _0, _0, _0, T] = Quantity[_0, _0, _0, _0, _0, _0, _0, T](v)
 
-  implicit def numericToQuantity[T: Numeric](v: T): QuantityConstructor[T] = new QuantityConstructor[T](v)
-
-  class QuantityConstructor[T: Numeric](v: T) {
-    private val num = numeric[T]
+  implicit class QuantityConstructor[T: Numeric](v: T) {
+    private val num = implicitly[Numeric[T]]
     
-    def m = Quantity[_1, _0, _0, _0, _0, _0, _0, T](v)
-    def kg = Quantity[_0, _1, _0, _0, _0, _0, _0, T](v)
-    def s = Quantity[_0, _0, _1, _0, _0, _0, _0, T](v)
-    def a = Quantity[_0, _0, _0, _1, _0, _0, _0, T](v)
-    def k = Quantity[_0, _0, _0, _0, _1, _0, _0, T](v)
+    def m   = Quantity[_1, _0, _0, _0, _0, _0, _0, T](v)
+    def kg  = Quantity[_0, _1, _0, _0, _0, _0, _0, T](v)
+    def s   = Quantity[_0, _0, _1, _0, _0, _0, _0, T](v)
+    def a   = Quantity[_0, _0, _0, _1, _0, _0, _0, T](v)
+    def k   = Quantity[_0, _0, _0, _0, _1, _0, _0, T](v)
     def mol = Quantity[_0, _0, _0, _0, _0, _1, _0, T](v)
-    def cd = Quantity[_0, _0, _0, _0, _0, _0, _1, T](v)
+    def cd  = Quantity[_0, _0, _0, _0, _0, _0, _1, T](v)
     
     def minute = Quantity[_0, _0, _1, _0, _0, _0, _0, T](num.times(v, num.fromInt(60)))
-    def hour = Quantity[_0, _0, _1, _0, _0, _0, _0, T](num.times(v, num.fromInt(3600)))   
+    def hour   = Quantity[_0, _0, _1, _0, _0, _0, _0, T](num.times(v, num.fromInt(3600)))   
   }
 
 
-  type Length[T] = Quantity[_1, _0, _0, _0, _0, _0, _0, T]
-  type Mass[T] = Quantity[_0, _1, _0, _0, _0, _0, _0, T]
-  type Time[T] = Quantity[_0, _0, _1, _0, _0, _0, _0, T]
-  type Currency[T] = Quantity[_0, _0, _0, _1, _0, _0, _0, T]
-  type Temperature[T] = Quantity[_0, _0, _0, _0, _1, _0, _0, T]
-  type Mol[T] = Quantity[_0, _0, _0, _0, _0, _1, _0, T]
+  type Length[T]            = Quantity[_1, _0, _0, _0, _0, _0, _0, T]
+  type Mass[T]              = Quantity[_0, _1, _0, _0, _0, _0, _0, T]
+  type Duration[T]          = Quantity[_0, _0, _1, _0, _0, _0, _0, T]
+  type Currency[T]          = Quantity[_0, _0, _0, _1, _0, _0, _0, T]
+  type Temperature[T]       = Quantity[_0, _0, _0, _0, _1, _0, _0, T]
+  type Mol[T]               = Quantity[_0, _0, _0, _0, _0, _1, _0, T]
   type LuminousIntensity[T] = Quantity[_0, _0, _0, _0, _0, _0, _1, T]
 
-  type Area[T] = Quantity[_2, _0, _0, _0, _0, _0, _0, T]
-  type Volume[T] = Quantity[_3, _0, _0, _0, _0, _0, _0, T]
-  type Speed[T] = Quantity[_1, _0, _1#Neg, _0, _0, _0, _0, T]
+  type Area[T]         = Quantity[_2, _0, _0, _0, _0, _0, _0, T]
+  type Volume[T]       = Quantity[_3, _0, _0, _0, _0, _0, _0, T]
+  type Speed[T]        = Quantity[_1, _0, _1#Neg, _0, _0, _0, _0, T]
   type Acceleration[T] = Quantity[_1, _0, _2#Neg, _0, _0, _0, _0, T]
 }
