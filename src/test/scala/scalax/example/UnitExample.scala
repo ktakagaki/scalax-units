@@ -6,9 +6,9 @@ import scalax.units.Units._
    *  - unit names as implicit methods
    *  - no standalone units like "m", "1 m" necessary
    *  - no weak conformance between numbers, e. g. Time[Int] will always stay an Int
-   *  - many parens necessary
+   *  - often either parentheses (2.0 m) * ... or dots 2.0.m * ... are necessary
    *  - "number * Quantity" doesn't work, only "Quantity * number"
-   *  - no unit information in toString, use niceString (and provide an implicit in scope, if necessary)  
+   *  - no unit information in toString, use unitString (and provide an implicit value in scope, if necessary)
    */
 
 object UnitExample extends App {
@@ -27,15 +27,15 @@ object UnitExample extends App {
   val accel: Acceleration[Double] = (10.0 m) / ((2.0 s) * (1.0 s))
   val accelNum: Double = accel toDouble
 
-  println(mass.niceString)
-  println(length.niceString)
-  println(temperature.niceString)
-  println(time.niceString)
-  println(time2.niceString)
-  println(time3.niceString)
-  println(speed.niceString)
-  println(area.niceString)
-  println(volume.niceString)
-  println(smallVolume.niceString)
-  println(accel.niceString)
+  println(mass.unitString)
+  println(length.unitString)
+  println(temperature.unitString)
+  println(time.unitString)
+  println(time2.unitString)
+  println(time3.unitString)
+  println(speed.unitString)
+  println(area.unitString)
+  println(volume.unitString)
+  println(smallVolume.unitString)
+  println(accel.unitString)
 }

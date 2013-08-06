@@ -47,7 +47,7 @@ object Units {
     def *[M2 <: MInt, KG2 <: MInt, S2 <: MInt, A2 <: MInt, K2 <: MInt, Mol2 <: MInt, CD2 <: MInt](m: Quantity[M2, KG2, S2, A2, K2, Mol2, CD2, T]) = Quantity[M + M2, KG + KG2, S + S2, A + A2, K + K2, Mol + Mol2, CD + CD2, T](num.times(value, m.value))
     def /[M2 <: MInt, KG2 <: MInt, S2 <: MInt, A2 <: MInt, K2 <: MInt, Mol2 <: MInt, CD2 <: MInt](m: Quantity[M2, KG2, S2, A2, K2, Mol2, CD2, T]) = Quantity[M - M2, KG - KG2, S - S2, A - A2, K - K2, Mol - Mol2, CD - CD2, T](num.div(value, m.value))
   
-    def niceString(implicit u: ToString[M, KG, S, A, K, Mol, CD]) = value + u.toString
+    def unitString(implicit u: ToString[M, KG, S, A, K, Mol, CD]) = value + u.toString
   }
   
   object Quantity {
