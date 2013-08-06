@@ -10,11 +10,11 @@ object Integers {
     type Visit0 <: ResultType
     type VisitSucc[Pre <: Nat] <: ResultType
   }
-  
+
   trait IntVisitor extends NatVisitor {
     type VisitNeg[Pos <: Nat] <: ResultType
   }
-  
+
   sealed trait MInt extends Visitable[IntVisitor] with Addable with Subtractable {
     type AddType = MInt
     type SubType = MInt
@@ -24,12 +24,12 @@ object Integers {
     type Succ <: MInt
     type Pre <: MInt
   }
-  
+
   sealed trait Nat extends MInt {
     type Accept[V <: IntVisitor] = AcceptNatVisitor[V]
     type AcceptNatVisitor[V <: NatVisitor] <: V#ResultType
   }
-  
+
   final class _0 extends Nat {
     type Add[I <: MInt] = I
     type Sub[I <: MInt] = I#Neg
@@ -38,9 +38,9 @@ object Integers {
     type Succ = MSucc[_0]
     type Pre = Succ#Neg
   }
-  
+
   sealed trait Pos extends Nat
-  
+
   final class MSucc[P <: Nat] extends Pos {
     type This = MSucc[P]
     type Add[N <: MInt] = P#Add[N]#Succ
@@ -50,16 +50,16 @@ object Integers {
     type Pre = P
     type Succ = MSucc[This]
   }
-  
+
   final class MNeg[N <: Pos] extends MInt {
-    type Add[N <: MInt] = N#Add[N#Neg]#Neg
+    type Add[P <: MInt] = N#Add[P#Neg]#Neg
     type Sub[N <: MInt] = Add[N#Neg]
     type Accept[V <: IntVisitor] = V#VisitNeg[N]
     type Neg = N
     type Succ = N#Pre#Neg
     type Pre = N#Succ#Neg
   }
-  
+
   type _1 = MSucc[_0]
   type _2 = MSucc[_1]
   type _3 = MSucc[_2]
@@ -70,7 +70,7 @@ object Integers {
   type _8 = MSucc[_7]
   type _9 = MSucc[_8]
   type _10 = MSucc[_9]
-  
+
   val _0 = new _0
   val _1 = new _1
   val _2 = new _2
