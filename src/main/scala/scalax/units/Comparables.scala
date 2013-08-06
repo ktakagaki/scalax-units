@@ -1,5 +1,7 @@
 package scalax.units
 
+import scala.language.higherKinds
+
 object Comparables {
   import Booleans._
 

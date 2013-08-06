@@ -1,5 +1,7 @@
 package scalax.units
 
+import scala.language.higherKinds
+
 object Nats {
   import Utils._
   import Booleans._

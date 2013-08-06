@@ -1,5 +1,7 @@
 package scalax.units
 
+import scala.language.implicitConversions
+
 object Units {
   import spire.math.Numeric
   import spire.math.Numeric._

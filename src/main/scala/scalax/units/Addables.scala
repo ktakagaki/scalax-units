@@ -1,5 +1,7 @@
 package scalax.units
 
+import scala.language.higherKinds
+
 object Addables {
   trait Addable {
     type AddType <: Addable

@@ -1,5 +1,7 @@
 package scalax.units
 
+import scala.language.higherKinds
+
 object Subtractables {
   trait Subtractable {
     type SubType <: Subtractable
