@@ -1,9 +1,9 @@
 name := "scalax-units"
 
-version := "0.9.2"
+version := "0.9.3"
 
-scalaVersion := "2.10.2"
+scalaVersion := "2.10.3"
 
-libraryDependencies += "org.spire-math" %% "spire" % "0.5.0"
+libraryDependencies += "org.spire-math" %% "spire" % "0.6.0"
 
 scalacOptions ++= Seq("-feature", "-deprecation", "-Xlint")
