@@ -1,4 +1,4 @@
-# scalax-units
+# scalax-units [<img src="https://api.travis-ci.org/soc/scalax-units.png"/>](https://travis-ci.org/soc/scalax-units)
 
 Units of Measurements for Scala
 based on Jesper Nordenberg's [metascala](http://www.assembla.com/spaces/metascala/wiki)
